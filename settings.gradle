@@ -1,0 +1,6 @@
+rootProject.name = 'gitvc'
+
+include 'gitvc-gradle-plugin'
+
+include 'examples'
+
