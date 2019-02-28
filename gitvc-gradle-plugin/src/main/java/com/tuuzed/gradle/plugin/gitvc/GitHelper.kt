@@ -78,13 +78,13 @@ internal class GitHelper(
             return@let item.split("\n")
                 .map {
                     try {
-                        item.trim().toFloat()
+                        it.trim().toFloat()
                     } catch (ignored: NumberFormatException) {
                         null
                     }
                 }
                 .filter { it != null }
-                .sortedBy { it }
+                .sortedByDescending { it }
                 .map { String.format("%.1f", it) }
         }
 

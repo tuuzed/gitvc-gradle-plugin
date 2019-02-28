@@ -3,9 +3,9 @@ package com.tuuzed.gradle.plugin.gitvc
 import org.junit.Before
 import org.junit.Test
 
-class GitUtilsTest {
+class GitHelperTest {
 
-    private val contextDir = "D:\\workspace\\xing-tai-rong-cang-project\\Inventory"
+    private val contextDir = ""
 
 
     private lateinit var git: GitHelper
