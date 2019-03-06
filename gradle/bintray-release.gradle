@@ -1,0 +1,13 @@
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    bintrayUser = 'tuuzed'
+    bintrayKey = ''
+    repoName = 'maven'
+    userOrg = 'tuuzed'
+    groupId = project.pom["groupId"]
+    artifactId = project.pom["artifactId"]
+    publishVersion = project.pom["version"]
+    desc = 'gitvc-gradle-plugin'
+    website = 'https://github.com/tuuzed/gitvc-gradle-plugin'
+}
