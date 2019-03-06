@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.tuuzed.gradle.plugin:gitvc:0.1.2'
+    classpath 'com.tuuzed.gradle.plugin:gitvc:0.1.2'
 }
 ```
 
