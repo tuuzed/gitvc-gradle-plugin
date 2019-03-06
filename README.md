@@ -1,6 +1,16 @@
 # gitvc-gradle-plugin
 
-## How to use:
+### Download
 
-see examples
+``` groovy
+repositories {
+    maven { url 'https://dl.bintray.com/tuuzed/maven' }
+}
+
+dependencies {
+    implementation 'com.tuuzed.gradle.plugin:gitvc:0.1.2'
+}
+```
+
+
  
