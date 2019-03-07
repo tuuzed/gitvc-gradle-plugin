@@ -18,7 +18,7 @@ uploadArchives {
             pom.groupId = pomMetadata.groupId
             pom.artifactId = pomMetadata.artifactId
             pom.version = pomMetadata.version
-            repository(url: "file:/" + rootProject.file(".repo").absolutePath)
+            repository(url: "file:///" + rootProject.file(".repo").absolutePath)
         }
     }
 }
@@ -42,8 +42,8 @@ artifacts {
  * bintray-release plugin
  */
 publish {
-    bintrayUser = System.getenv('bintray.user')
-    bintrayKey = System.getenv('bintray.apiKey')
+    bintrayUser = System.getenv('BINTRAY_USER')
+    bintrayKey = System.getenv('BINTRAY_API_KEY')
     userOrg = 'tuuzed'
     repoName = 'maven'
     dryRun = false
