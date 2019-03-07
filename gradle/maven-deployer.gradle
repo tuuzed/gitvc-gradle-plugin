@@ -3,9 +3,9 @@ apply plugin: 'maven'
 uploadArchives {
     repositories {
         mavenDeployer {
-            pom.groupId = project.pom["groupId"]
-            pom.artifactId = project.pom["artifactId"]
-            pom.version = project.pom["version"]
+            pom.groupId = rootProject.pomGroupId
+            pom.artifactId = rootProject.pomArtifactIdPrefix + project.pomArtifactId
+            pom.version = rootProject.pomVersion
             repository(url: "file:" + rootDir.getAbsolutePath() + "/maven/")
         }
     }

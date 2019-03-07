@@ -1,13 +1,17 @@
 apply plugin: 'com.novoda.bintray-release'
 
+def bintrayProperties = new Properties()
+bintrayProperties.load(project.rootProject.file('bintray.properties').newDataInputStream())
+
 publish {
-    bintrayUser = 'tuuzed'
-    bintrayKey = ''
-    repoName = 'maven'
+    bintrayUser = bintrayProperties.getProperty('bintray.user')
+    bintrayKey = bintrayProperties.getProperty('bintray.apiKey')
     userOrg = 'tuuzed'
-    groupId = project.pom["groupId"]
-    artifactId = project.pom["artifactId"]
-    publishVersion = project.pom["version"]
-    desc = 'gitvc-gradle-plugin'
-    website = 'https://github.com/tuuzed/gitvc-gradle-plugin'
+    repoName = 'maven'
+    dryRun = false
+    groupId = rootProject.pomGroupId
+    artifactId = rootProject.pomArtifactIdPrefix + project.pomArtifactId
+    publishVersion = rootProject.pomVersion
+    desc = 'recyclerview adapter'
+    website = 'https://github.com/tuuzed/recyclerview-adapter'
 }

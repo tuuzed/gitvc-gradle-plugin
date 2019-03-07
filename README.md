@@ -1,6 +1,8 @@
 # gitvc-gradle-plugin
 
-### Download
+[ ![Download](https://api.bintray.com/packages/tuuzed/maven/gitvc/images/download.svg) ](https://bintray.com/tuuzed/maven/gitvc/_latestVersion)
+
+### 添加依赖
 
 ``` groovy
 repositories {
@@ -8,9 +10,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.tuuzed.gradle.plugin:gitvc:0.1.2'
+    implementation 'com.tuuzed.gradle.plugin:gitvc:latest.release'
 }
 ```
 
+### 
 
  
