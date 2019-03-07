@@ -1,12 +1,7 @@
 buildscript {
-
-    ext.pomGroupId = 'com.tuuzed.gradle.plugin'
-    ext.pomArtifactIdPrefix = ''
-    ext.pomVersion = '0.1.2'
-    
     ext.kotlin_version = '1.3.21'
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
         mavenCentral()
     }
     dependencies {
@@ -14,15 +9,18 @@ buildscript {
         classpath 'com.novoda:bintray-release:0.9'
     }
 }
+
+allprojects {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        mavenCentral()
+    }
+}
+
 apply plugin: 'java'
 
-group 'com.tuuzed.gradle.plugin'
-version '1.0.0'
-
-repositories {
-    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-    mavenCentral()
-}
+group = 'com.tuuzed.gradle.plugin'
+version = '0.1.2'
 
 dependencies {
     testImplementation 'junit:junit:4.12'

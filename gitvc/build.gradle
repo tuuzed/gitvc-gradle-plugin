@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+group = rootProject.group
+version = rootProject.version
+
+dependencies {
+    implementation gradleApi()
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7"
+    testImplementation 'junit:junit:4.12'
+}
+
+
+apply from: './publish.gradle'

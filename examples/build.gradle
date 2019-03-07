@@ -1,13 +1,13 @@
 buildscript {
     repositories {
-        maven { url rootProject.file("maven").absolutePath }
+        maven { url rootProject.file(".repo").absolutePath }
         maven { url 'https://dl.bintray.com/tuuzed/maven' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.tuuzed.gradle.plugin:gitvc:0.1.2'
+        classpath 'com.tuuzed.gradle.plugin:gitvc:latest.release'
     }
 
     extensions.GitVCPlugin = [
