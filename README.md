@@ -1,6 +1,6 @@
 # gitvc-gradle-plugin
 
-[ ![Download](https://api.bintray.com/packages/tuuzed/maven/gitvc/images/download.svg) ](https://bintray.com/tuuzed/maven/gitvc/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/tuuzed/maven/com.tuuzed.gradle.plugin%3Agitvc/images/download.svg) ](https://bintray.com/tuuzed/maven/com.tuuzed.gradle.plugin%3Agitvc/_latestVersion)
 
 ### 添加依赖
 
