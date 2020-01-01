@@ -1,8 +1,8 @@
 package com.tuuzed.gradle.plugin.gitvc
 
-internal data class MajorAndMinor(
-    var major: Int,
-    var minor: Int
+data class MajorAndMinor(
+    var major: Int = 0,
+    var minor: Int = 0
 ) {
     override fun toString() = "$major.$minor"
 }

@@ -1,6 +1,6 @@
 package com.tuuzed.gradle.plugin.gitvc
 
-internal data class GitVCPluginConfig(
+data class GitVCPluginConfig(
     var gitHome: String = "",
     var repoDir: String = "",
     var buildTag: String = "",

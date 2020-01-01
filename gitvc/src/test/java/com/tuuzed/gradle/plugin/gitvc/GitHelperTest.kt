@@ -8,11 +8,11 @@ class GitHelperTest {
     private val contextDir = ""
 
 
-    private lateinit var git: GitHelper
+    private lateinit var git: GitMetadata
 
     @Before
     fun setUp() {
-        git = GitHelper(contextDir = contextDir)
+        git = GitMetadata(contextDir = contextDir)
     }
 
     @Test
