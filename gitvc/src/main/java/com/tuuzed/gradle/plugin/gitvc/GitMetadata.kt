@@ -82,9 +82,13 @@ internal class GitMetadata(
                     emptyList()
                 } else {
                     item.split("\n")
-                        .mapNotNull { it.trim().toFloatOrNull() }
-                        .sortedByDescending { it * 10.toDouble().pow(it.toString().split(".")[1].length.toDouble()) }
-                        .map { it.toString() }
+                        .asSequence()
+                        .filter { it.trim().toFloatOrNull() != null }
+                        .sortedByDescending {
+                            it.toFloat() * 10.toDouble().pow(it.split(".")[1].length.toDouble())
+                        }
+                        .toList()
+
                 }
             }
         }.getOrNull() ?: emptyList()
