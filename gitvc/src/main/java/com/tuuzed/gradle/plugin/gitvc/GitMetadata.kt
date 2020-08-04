@@ -8,11 +8,10 @@ internal class GitMetadata(
     private val contextDir: String = ""
 ) {
 
-    fun getMajorAndMinor(buildTag: String): MajorAndMinor {
-        val majorAndMinor = MajorAndMinor()
+    fun getMajorAndMinor(buildTag: String): Pair<Int, Int> {
         val tagList = tagList
         if (tagList.isEmpty()) {
-            return majorAndMinor
+            return 0 to 0
         }
         val tag = when {
             buildTag.isEmpty() -> tagList[0]
@@ -21,12 +20,11 @@ internal class GitMetadata(
         }
         try {
             val arrays = tag.split(".")
-            majorAndMinor.major = arrays[0].toInt()
-            majorAndMinor.minor = arrays[1].toInt()
+            return arrays[0].toInt() to arrays[1].toInt()
         } catch (e: Exception) {
             // ignored
         }
-        return majorAndMinor
+        return 0 to 0
     }
 
     fun getCommitCount(buildTag: String): Int {
