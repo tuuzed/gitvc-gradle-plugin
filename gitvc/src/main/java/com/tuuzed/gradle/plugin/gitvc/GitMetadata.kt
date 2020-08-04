@@ -1,6 +1,7 @@
 package com.tuuzed.gradle.plugin.gitvc
 
 import java.io.File
+import kotlin.math.pow
 
 internal class GitMetadata(
     private val gitHome: String = "",
@@ -85,18 +86,13 @@ internal class GitMetadata(
         get() = try {
             "$git tag --list".execute(dir = contextDir).text().let { item ->
                 if (item.trim().isEmpty()) {
-                    return@let emptyList()
+                    emptyList()
+                } else {
+                    item.split("\n")
+                        .mapNotNull { it.trim().toFloatOrNull() }
+                        .sortedByDescending { it * 10.toDouble().pow(it.toString().split(".")[1].length.toDouble()) }
+                        .map { it.toString() }
                 }
-                return@let item.split("\n")
-                    .mapNotNull {
-                        try {
-                            it.trim().toFloat()
-                        } catch (ignored: NumberFormatException) {
-                            null
-                        }
-                    }
-                    .sortedByDescending { it }
-                    .map { String.format("%.1f", it) }
             }
         } catch (e: Exception) {
             emptyList()
