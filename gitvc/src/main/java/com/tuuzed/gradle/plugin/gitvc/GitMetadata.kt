@@ -30,7 +30,7 @@ internal class GitMetadata(
     }
 
     fun getCommitCount(buildTag: String): Int {
-        return try {
+        return kotlin.runCatching {
             val tagList = tagList
             if (tagList.isEmpty()) {
                 return totalCommitCount
@@ -48,42 +48,35 @@ internal class GitMetadata(
             }
             val commitCount = command.execute(dir = contextDir).text().trim()
             commitCount.toInt()
-        } catch (e: Exception) {
-            0
-        }
+        }.getOrNull() ?: 0
     }
 
-    val isDirty: Boolean
-        get() = try {
+    val isDirty: Boolean by lazy {
+        kotlin.runCatching {
             "$git status --short".execute(dir = contextDir).text().trim().isNotEmpty()
-        } catch (e: Exception) {
-            false
-        }
+        }.getOrNull() ?: false
+    }
 
-    val lastCommitSha: String
-        get() = try {
+    val lastCommitSha: String by lazy {
+        kotlin.runCatching {
             "$git log -1 --pretty=%H".execute(dir = contextDir).text().trim()
-        } catch (e: Exception) {
-            ""
-        }
+        }.getOrNull() ?: ""
+    }
 
-    val lastCommitDate: String
-        get() = try {
+    val lastCommitDate: String by lazy {
+        kotlin.runCatching {
             "$git log -1 --pretty=%cd".execute(dir = contextDir).text().trim()
-        } catch (e: Exception) {
-            ""
-        }
+        }.getOrNull() ?: ""
+    }
 
-    val totalCommitCount: Int
-        get() = try {
+    val totalCommitCount: Int by lazy {
+        kotlin.runCatching {
             "$git rev-list HEAD --count".execute(dir = contextDir).text().trim().toInt()
-        } catch (e: Exception) {
-            0
-        }
+        }.getOrNull() ?: 0
+    }
 
-
-    val tagList: List<String>
-        get() = try {
+    val tagList: List<String> by lazy {
+        kotlin.runCatching {
             "$git tag --list".execute(dir = contextDir).text().let { item ->
                 if (item.trim().isEmpty()) {
                     emptyList()
@@ -94,33 +87,29 @@ internal class GitMetadata(
                         .map { it.toString() }
                 }
             }
-        } catch (e: Exception) {
-            emptyList()
-        }
-
-    val currentBranch: String
-        get() = try {
+        }.getOrNull() ?: emptyList()
+    }
+    val currentBranch: String by lazy {
+        kotlin.runCatching {
             "$git branch --list".execute(dir = contextDir).text().let {
                 if (it.trim().isEmpty()) {
                     return@let ""
                 }
                 it.split("\n").forEach { item ->
                     if (item.startsWith("* ")) {
-                        return item.replace("* ", "")
+                        return@let item.replace("* ", "")
                     }
                 }
                 return@let ""
             }
-        } catch (e: Exception) {
-            ""
-        }
+        }.getOrNull() ?: ""
+    }
 
-
-    private val git: String
-        get() = if (gitHome.isEmpty()) {
+    private val git: String by lazy {
+        if (gitHome.isEmpty()) {
             "git"
         } else {
             "$gitHome${File.separator}git"
         }
-
+    }
 }
