@@ -2,7 +2,7 @@
 
 [ ![Download](https://api.bintray.com/packages/tuuzed/maven/io.github.tuuzed.gitvc%3Agradle-plugin/images/download.svg) ](https://bintray.com/tuuzed/maven/io.github.tuuzed.gitvc%3Agradle-plugin/_latestVersion)
 
-### 如何使用
+### 如何使用?
 
 ``` groovy
 buildscript {

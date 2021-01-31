@@ -8,7 +8,7 @@ buildscript {
     }
     extensions.GitVcConfig = [
         "GIT_HOME"     : null,
-        "REPO_DIR"     : "null",
+        "REPO_DIR"     : null,
         "BUILD_TAG"    : null,
         "ENABLE_DIRTY" : true,
         "ENABLE_BRANCH": false,
