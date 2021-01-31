@@ -1,40 +1,37 @@
-package com.tuuzed.gradle.plugin.gitvc
+package io.github.tuuzed.gitvc
 
 import java.io.File
 import kotlin.math.pow
 
-internal class GitMetadata(
-    private val gitHome: String = "",
-    private val contextDir: String = ""
+internal class GitCommands(
+    private val gitHome: String?,
+    private val contextDir: String?,
+    private val buildTag: String?,
 ) {
 
-    fun getMajorAndMinor(buildTag: String): Pair<Int, Int> {
-        val tagList = tagList
+    private val git: String get() = if (gitHome.isNullOrEmpty()) "git" else "$gitHome${File.separator}git"
+
+    val majorAndMinor: Pair<Int, Int> by lazy {
         if (tagList.isEmpty()) {
-            return 0 to 0
+            return@lazy 0 to 0
         }
         val tag = when {
-            buildTag.isEmpty() -> tagList[0]
+            buildTag.isNullOrEmpty() -> tagList[0]
             tagList.contains(buildTag) -> buildTag
             else -> throw RuntimeException("标签($buildTag)不存在。")
         }
-        try {
-            val arrays = tag.split(".")
-            return arrays[0].toInt() to arrays[1].toInt()
-        } catch (e: Exception) {
-            // ignored
-        }
-        return 0 to 0
+        return@lazy kotlin.runCatching {
+            tag.split(".").let { it[0].toInt() to it[1].toInt() }
+        }.getOrNull() ?: 0 to 0
     }
 
-    fun getCommitCount(buildTag: String): Int {
-        return kotlin.runCatching {
-            val tagList = tagList
+    val commitCount: Int by lazy {
+        kotlin.runCatching {
             if (tagList.isEmpty()) {
-                return totalCommitCount
+                return@lazy totalCommitCount
             }
             val command = when {
-                buildTag.isEmpty() -> "$git rev-list ${tagList[0]}.. --count"
+                buildTag.isNullOrEmpty() -> "$git rev-list ${tagList[0]}.. --count"
                 tagList.contains(buildTag) -> {
                     when (val indexOf = tagList.indexOf(buildTag)) {
                         // 最新标签
@@ -73,6 +70,22 @@ internal class GitMetadata(
         }.getOrNull() ?: 0
     }
 
+    val currentBranch: String by lazy {
+        kotlin.runCatching {
+            "$git branch --list".execute(dir = contextDir).text().let {
+                if (it.trim().isEmpty()) {
+                    return@let ""
+                }
+                it.split("\n").forEach { item ->
+                    if (item.startsWith("* ")) {
+                        return@let item.replace("* ", "")
+                    }
+                }
+                return@let ""
+            }
+        }.getOrNull() ?: ""
+    }
+
     val tagList: List<String> by lazy {
         kotlin.runCatching {
             "$git tag --list".execute(dir = contextDir).text().let { item ->
@@ -91,27 +104,5 @@ internal class GitMetadata(
             }
         }.getOrNull() ?: emptyList()
     }
-    val currentBranch: String by lazy {
-        kotlin.runCatching {
-            "$git branch --list".execute(dir = contextDir).text().let {
-                if (it.trim().isEmpty()) {
-                    return@let ""
-                }
-                it.split("\n").forEach { item ->
-                    if (item.startsWith("* ")) {
-                        return@let item.replace("* ", "")
-                    }
-                }
-                return@let ""
-            }
-        }.getOrNull() ?: ""
-    }
 
-    private val git: String by lazy {
-        if (gitHome.isEmpty()) {
-            "git"
-        } else {
-            "$gitHome${File.separator}git"
-        }
-    }
 }

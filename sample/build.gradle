@@ -1,17 +1,10 @@
-# gitvc-gradle-plugin
-
-[ ![Download](https://api.bintray.com/packages/tuuzed/maven/io.github.tuuzed.gitvc%3Agradle-plugin/images/download.svg) ](https://bintray.com/tuuzed/maven/io.github.tuuzed.gitvc%3Agradle-plugin/_latestVersion)
-
-### 如何使用
-
-``` groovy
 buildscript {
     repositories {
         maven { url 'https://dl.bintray.com/tuuzed/maven' }
         mavenCentral()
     }
     dependencies {
-        classpath "io.github.tuuzed.gitvc:gradle-plugin:0.3.1"
+        classpath "io.github.tuuzed.gitvc:gradle-plugin:0.3.2"
     }
     extensions.GitVcConfig = [
         "GIT_HOME"     : null,
@@ -39,6 +32,3 @@ task test() {
     // ]
     System.err.println(GitVc)
 }
-```
-
- 
