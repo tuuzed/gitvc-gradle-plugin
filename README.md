@@ -11,7 +11,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "io.github.tuuzed.gitvc:gradle-plugin:0.3.1"
+        classpath "io.github.tuuzed.gitvc:gradle-plugin:latest.release"
     }
     extensions.GitVcConfig = [
         "GIT_HOME"     : null,
@@ -36,9 +36,11 @@ task test() {
     //     "VERSION_NAME"    : versionName,
     //     "LAST_COMMIT_SHA" : lastCommitSha,
     //     "LAST_COMMIT_DATE": lastCommitDate,
+    //     "BUILD_DATE"      : buildDate,
     // ]
     System.err.println(GitVc)
 }
+
 ```
 
  

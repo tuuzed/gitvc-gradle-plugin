@@ -2,6 +2,8 @@ package io.github.tuuzed.gitvc
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import java.text.SimpleDateFormat
+import java.util.*
 
 class GitVcPlugin : Plugin<Project> {
 
@@ -35,6 +37,7 @@ class GitVcPlugin : Plugin<Project> {
             "VERSION_NAME" to versionName,
             "LAST_COMMIT_SHA" to lastCommitSha,
             "LAST_COMMIT_DATE" to lastCommitDate,
+            "BUILD_DATE" to SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy ZZZ", Locale.ENGLISH).format(Date())
         )
         project.extensions.add("GitVc", gitVc)
     }
