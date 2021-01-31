@@ -43,7 +43,7 @@ class GitVcPlugin : Plugin<Project> {
     }
 
     private val Project.config: GitVcConfig
-        get() = extensions.getByName("GitVcConfig").let {
+        get() = kotlin.runCatching { extensions.getByName("GitVcConfig") }.getOrNull()?.let {
             if (it is Map<*, *>) {
                 GitVcConfig(
                     GIT_HOME = it["GIT_HOME"]?.toString(),
@@ -55,6 +55,6 @@ class GitVcPlugin : Plugin<Project> {
             } else {
                 GitVcConfig()
             }
-        }
+        } ?: GitVcConfig()
 
 }
