@@ -1,9 +1,9 @@
 package com.github.tuuzed.gitvcgradleplugin
 
 internal data class GitVcConfig(
-    var GIT_HOME: String? = null,
-    var REPO_DIR: String? = null,
-    var BUILD_TAG: String? = null,
-    var ENABLE_BRANCH: Boolean = false,
-    var ENABLE_DIRTY: Boolean = true,
+    val GIT_HOME: String? = null,
+    val REPO_DIR: String? = null,
+    val BUILD_TAG: String? = null,
+    val ENABLE_BRANCH: Boolean = false,
+    val ENABLE_DIRTY: Boolean = true,
 )
