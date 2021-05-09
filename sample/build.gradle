@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.github.tuuzed:gitvc-gradle-plugin:1.0.7'
+        classpath 'com.github.tuuzed:gitvc-gradle-plugin:1.1.0'
     }
     extensions.GitVcConfig = [
         "GIT_HOME"     : null,
