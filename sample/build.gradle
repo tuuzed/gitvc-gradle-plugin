@@ -1,22 +1,22 @@
 buildscript {
     repositories {
-        maven { url 'https://dl.bintray.com/tuuzed/maven' }
+//        maven { url 'https://jitpack.io' }
         mavenCentral()
     }
     dependencies {
-        classpath "io.github.tuuzed.gitvc:gradle-plugin:latest.release"
+//        classpath 'com.github.tuuzed:gitvc-gradle-plugin:1.0.0'
     }
-    extensions.GitVcConfig = [
-        "GIT_HOME"     : null,
-        "REPO_DIR"     : null,
-        "BUILD_TAG"    : null,
-        "ENABLE_DIRTY" : true,
-        "ENABLE_BRANCH": false,
-    ]
+//    extensions.GitVcConfig = [
+//        "GIT_HOME"     : null,
+//        "REPO_DIR"     : null,
+//        "BUILD_TAG"    : null,
+//        "ENABLE_DIRTY" : true,
+//        "ENABLE_BRANCH": false,
+//    ]
 }
 
 
-apply plugin: "io.github.tuuzed.gitvc"
+// apply plugin: "com.github.tuuzed.gitvc"
 
 task test() {
     // [
@@ -31,5 +31,5 @@ task test() {
     //     "LAST_COMMIT_DATE": lastCommitDate,
     //     "BUILD_DATE"      : buildDate,
     // ]
-    System.err.println(GitVc)
+    // System.err.println(GitVc)
 }

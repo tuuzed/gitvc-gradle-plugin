@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'maven'
+    id 'maven-publish'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+}
+
+group rootProject.group
+version rootProject.version
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = group
+            pom.version = version
+            repository(url: "file://" + rootProject.file("dists/m2").absolutePath)
+        }
+    }
+}
+
+task distJars(group: "package", dependsOn: uploadArchives)
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.java.srcDirs
+    archiveClassifier.set("sources")
+}
+
+artifacts {
+    archives sourcesJar
+}

@@ -1,4 +1,4 @@
-package io.github.tuuzed.gitvc
+package com.github.tuuzed.gitvcgradleplugin
 
 import java.io.File
 import kotlin.math.pow

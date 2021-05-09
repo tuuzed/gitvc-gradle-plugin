@@ -1,4 +1,4 @@
-package io.github.tuuzed.gitvc
+package com.github.tuuzed.gitvcgradleplugin
 
 internal data class GitVcConfig(
     var GIT_HOME: String? = null,

@@ -1,4 +1,4 @@
 rootProject.name = 'gitvc-gradle-plugin'
-include 'gradle-plugin'
+include 'gitvc-gradle-plugin'
 include 'sample'
 
